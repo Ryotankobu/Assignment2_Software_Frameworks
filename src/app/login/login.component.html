@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>CHAT APPLICATION</h1>
+
+    <h2>Login</h2>
+    <form (ngSubmit)="onSubmit()">
+        <label for="username">Username:</label>
+        <input type="username" id="username" [(ngModel)]="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required>
+        <br>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p> -->
+</div>
