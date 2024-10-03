@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [HeaderComponent, CommonModule, FormsModule],
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css'] // Note the correct plural form here
+  styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
   private socket: any;
@@ -21,9 +21,7 @@ export class ChatComponent {
   roomnotice: string = '';
   currentroom: string = '';
   isinRoom = false;
-  newroom: string = '';
   numusers: number = 0;
-  canCreateGroup: boolean = false;
   user: any;
 
   constructor(private socketservice: SocketService, private router: Router) {}
@@ -32,109 +30,87 @@ export class ChatComponent {
     const currentUserData = sessionStorage.getItem('current_user');
     if (currentUserData) {
       this.user = JSON.parse(currentUserData);
-      console.log('User found in session:', this.user);
     } else {
-      console.error('No current user found in session storage');
       this.router.navigate(['/login']);
-      return; // Early exit to prevent further execution
+      return;
     }
 
     this.socketservice.initSocket();
     this.setupSocketListeners();
   }
 
-setupSocketListeners() {
-  this.socketservice.getMessage((m) => {
-    this.messages.push(m);
-  });
+  setupSocketListeners() {
+    // Listen for messages from the server
+    this.socketservice.getMessage((m) => {
+      this.messages.push(m);
+    });
 
-  this.socketservice.reqroomList();
- this.socketservice.getroomList((msg) => {
-  console.log('All rooms received from server:', msg);
-  console.log('User groups:', this.user.groups);
+    // Request the room list from the server
+    this.socketservice.reqroomList();
+    this.socketservice.getroomList((msg) => {
+      console.log('All rooms received from server:', msg);
+      this.rooms = JSON.parse(msg).filter((room: string) => {
+        return this.user.groups.includes(room);
+      });
+    });
 
-  // Check if filtering logic works properly
-  this.rooms = JSON.parse(msg).filter((room: string) => {
-    console.log('Checking room:', room);
-    return this.user.groups.includes(room);
-  });
+    // Listen for notices about users joining/leaving
+    this.socketservice.notice((msg) => {
+      this.roomnotice = msg;
+    });
 
-  console.log('Filtered rooms for the user:', this.rooms);
-});
+    // Listener for the 'joined' event
+    this.socketservice.joined((room) => {
+      console.log('Joined room event received:', room); 
+      this.currentroom = room;
+      this.isinRoom = true;
+      console.log('isinRoom set to:', this.isinRoom);  // Ensure isinRoom is being updated
+    });
+  }
 
-
-  this.socketservice.notice((msg) => {
-    this.roomnotice = msg;
-  });
-
-  this.socketservice.joined((msg) => {
-    this.currentroom = msg;
-    this.isinRoom = this.currentroom !== '';
-  });
-}
-
-
-
-  // Join a selected room
   joinroom() {
     if (!this.roomslist) {
-      console.error('No room selected.');
       this.roomnotice = 'Please select a room to join.';
       return;
     }
 
     if (this.user.groups.includes(this.roomslist)) {
       this.socketservice.joinroom(this.roomslist);
-      this.socketservice.reqnumbers(this.roomslist);
-      this.socketservice.getnumusers((res) => {
-        this.numusers = res;
-        console.log('Number of users in the room:', this.numusers);
-      });
-      this.roomnotice = ''; // Clear any previous notices if the room is joined successfully
+      this.roomnotice = '';  // Clear any previous room notices
     } else {
-      console.error('You do not have access to this room.');
       this.roomnotice = 'Access Denied: You do not have access to this room.';
     }
   }
 
-  // Clear the room notice
-  clearnotice() {
-    this.roomnotice = '';
-  }
-
-  // Leave the current room
   leaveroom() {
     this.socketservice.leaveroom(this.currentroom);
-    this.socketservice.reqnumbers(this.currentroom);
-    this.socketservice.getnumusers((res) => {
-      this.numusers = res;
-      console.log('Updated number of users after leaving the room:', this.numusers);
-    });
-    this.currentroom = '';
     this.isinRoom = false;
+    this.currentroom = '';
     this.numusers = 0;
     this.roomnotice = '';
     this.messages = [];
   }
 
-  // Send a chat message
   chat() {
-    if (this.messageContent) {
-      this.socketservice.sendMessage(this.messageContent);
+    if (this.messageContent.trim()) {
+      // Send message along with the current room
+      this.socketservice.sendMessage({
+        message: this.messageContent,
+        room: this.currentroom
+      });
+      this.messages.push(`You: ${this.messageContent}`);
       this.messageContent = '';
-    } else {
-      console.log('No message to send');
     }
   }
 
+  clearnotice() {
+    this.roomnotice = '';
+  }
 
   selectRoom(room: string) {
-  this.roomslist = room;
-  console.log('Selected room:', this.roomslist);  // Log the selected room
-}
+    this.roomslist = room;
+  }
 
-
-  // Navigate back to the login page
   backLogin() {
     this.router.navigate(['/login']);
   }

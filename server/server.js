@@ -40,8 +40,23 @@ chat.on("connection", (socket) => {
 
   // Handle room joining
   socket.on("joinRoom", (room) => {
-    socket.join(room);
-    console.log(`User with ID ${socket.id} joined room ${room}`);
+    if (rooms.includes(room)) {
+      socket.join(room);
+      console.log(`User with ID ${socket.id} joined room ${room}`);
+
+      // Emit the 'joined' event so the client knows they have joined
+      chat.to(room).emit("joined", room); // Notify the user in the room
+    } else {
+      console.log(`Room ${room} does not exist.`);
+    }
+  });
+
+  // Handle message broadcasting to a room
+  socket.on("message", (data) => {
+    const { message, room } = data;
+
+    // Emit the message to all users in the room
+    chat.to(room).emit("message", message);
   });
 
   // Handle user disconnect

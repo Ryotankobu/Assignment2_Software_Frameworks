@@ -81,9 +81,10 @@ export class SocketService {
     this.socket.on('notice', (res: any) => next(res));
   }
 
-  sendMessage(message: string): void {
-    this.socket.emit('message', message);
-  }
+ sendMessage(data: { message: string, room: string }): void {
+  this.socket.emit('message', data);  // Emit the message and room to the server
+}
+
 
   getMessage(next: (message: any) => void): void {
     this.socket.on('message', (message: any) => next(message));
