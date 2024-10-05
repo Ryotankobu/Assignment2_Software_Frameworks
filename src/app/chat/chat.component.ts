@@ -13,9 +13,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
-  private socket: any;
   messageContent: string = '';
-  messages: string[] = [];
+  messages: any[] = [];  // Updated to store full message objects
   rooms: any[] = [];
   roomslist: string = '';
   roomnotice: string = '';
@@ -40,9 +39,15 @@ export class ChatComponent {
   }
 
   setupSocketListeners() {
-    // Listen for messages from the server
-    this.socketservice.getMessage((m) => {
-      this.messages.push(m);
+    // Listen for chat history when joining a room
+    this.socketservice.getChatHistory((history) => {
+      console.log('Chat history received:', history);
+      this.messages = history.map((msg: any) => `${msg.sender}: ${msg.message}`);  // Display chat history
+    });
+
+    // Listen for real-time messages from the server
+    this.socketservice.getMessage((message: any) => {
+      this.messages.push(`${message.sender}: ${message.message}`);
     });
 
     // Request the room list from the server
@@ -61,7 +66,7 @@ export class ChatComponent {
 
     // Listener for the 'joined' event
     this.socketservice.joined((room) => {
-      console.log('Joined room event received:', room); 
+      console.log('Joined room event received:', room);
       this.currentroom = room;
       this.isinRoom = true;
       console.log('isinRoom set to:', this.isinRoom);  // Ensure isinRoom is being updated
@@ -93,12 +98,13 @@ export class ChatComponent {
 
   chat() {
     if (this.messageContent.trim()) {
-      // Send message along with the current room
+      // Send message along with the current room and sender info
       this.socketservice.sendMessage({
         message: this.messageContent,
-        room: this.currentroom
+        room: this.currentroom,
+        sender: this.user.username  // Send the user's name with the message
       });
-      this.messages.push(`You: ${this.messageContent}`);
+//       this.messages.push(`You: ${this.messageContent}`);
       this.messageContent = '';
     }
   }
