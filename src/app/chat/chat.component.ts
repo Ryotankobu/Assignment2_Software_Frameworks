@@ -104,7 +104,7 @@ export class ChatComponent {
         room: this.currentroom,
         sender: this.user.username  // Send the user's name with the message
       });
-      this.messages.push(`You: ${this.messageContent}`);
+//       this.messages.push(`You: ${this.messageContent}`);
       this.messageContent = '';
     }
   }
