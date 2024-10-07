@@ -63,18 +63,25 @@ chat.on("connection", (socket) => {
   });
 
   // Handle message broadcasting to a room and save to MongoDB
- socket.on("message", async (data) => {
-   console.log('Received message data from client:', data);  // Log received data
-   const { message, room, sender } = data;
+socket.on("message", async (data) => {
 
-   // Save the message to MongoDB
-   const newMessage = new Message({ room, sender, message });
-   await newMessage.save();
+  const { message, room, sender } = data;
+  console.log('Received message data from client:', data);  // Log the message data
 
-   // Emit the message to all users in the room
-   chat.to(room).emit("message", { sender, message });
-   console.log('Broadcasting message to room:', room, { sender, message });  // Log broadcast data
- });
+  try {
+    console.log("Attempting to save message...");
+    const newMessage = new Message({ room, sender, message });
+    await newMessage.save();  // Save to MongoDB
+    console.log("Message saved successfully!");
+
+    chat.to(room).emit("message", { sender, message });  // Broadcast message
+    console.log('Broadcasting message to room:', room, { sender, message });
+  } catch (error) {
+    console.error("Error saving message to MongoDB:", error);  // Log any error
+  }
+});
+
+
 
 
   // Handle user disconnect
