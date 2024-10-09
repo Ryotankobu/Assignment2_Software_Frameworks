@@ -13,7 +13,7 @@
 6. [Interaction Between Client and Server](#interaction-between-client-and-server)
 
 ---
-## 2. Description of Git Repository
+## 1. Description of Git Repository
 ### Repository Structure:
 - **Remote Repository:**:
 - master branch: Used to maintain the latest version of the code.
@@ -23,6 +23,7 @@
 - ryota_edit: Used for code editing, as well as for comparing the latest code with the edited code.
 - 
 ### How I used it:
+As a practice, I always pull the latest remote code into my local master branch for version control. Then, I switch to my local editing branch (ryota_edit) to make changes. After editing, I merge it into my local master branch to check for any conflicts, even though there were no conflicts since I was the only person working on this project. I followed this by pushing my local master branch to the remote master for version control.
 
 ## 2. Description of Data Structures Used in Client and Server
 
