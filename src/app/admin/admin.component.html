@@ -1,79 +1,88 @@
 
-<div *ngIf="userInfo">
-  <app-header></app-header>
+
+<div class="main-wrapper">
+
+  <div *ngIf="userInfo">
+    <app-header></app-header>
     <p>Welcome, {{ userInfo.username }}! </p>
     <p>Role: {{ userInfo.role }}</p>
     <p>Groups:</p>
     <ul>
-        <li *ngFor="let group of userInfo.groups">{{ group }}</li>
+      <li *ngFor="let group of userInfo.groups">{{ group }}</li>
     </ul>
-</div>
+  </div>
 
 
 
-<!-- ---------------------------------------------------------------------------------- -->
+  <!-- ---------------------------------------------------------------------------------- -->
 
-<!-- Only show the following options if the user is a Super Admin -->
-<div *ngIf="isSuperAdmin">
+  <!-- Only show the following options if the user is a Super Admin -->
+  <div *ngIf="isSuperAdmin">
     <h2>Super Admin Actions</h2>
 
     <!-- Form to promote a user to Group Admin -->
     <div>
-        <h3>Promote User to Group Admin</h3>
-        <input type="text" placeholder="Enter username" #promoteUserInput>
-        <button (click)="promoteToGroupAdmin(promoteUserInput.value)">Promote to Group Admin</button>
+      <h3>Promote User to Group Admin</h3>
+      <input type="text" placeholder="Enter username" #promoteUserInput>
+      <button (click)="promoteToGroupAdmin(promoteUserInput.value)">Promote to Group Admin</button>
     </div>
 
     <!-- Form to remove a user -->
     <div>
-        <h3>Remove User</h3>
-        <input type="text" placeholder="Enter username" #removeUserInput>
-        <button (click)="removeUser(removeUserInput.value)">Remove User</button>
+      <h3>Remove User</h3>
+      <input type="text" placeholder="Enter username" #removeUserInput>
+      <button (click)="removeUser(removeUserInput.value)">Remove User</button>
     </div>
 
     <!-- Form to upgrade a user to Super Admin -->
-<div>
-    <h3>Upgrade User to Super Admin</h3>
-    <input type="text" placeholder="Enter username" #upgradeUserInput>
-    <button (click)="upgradeToSuperAdmin(upgradeUserInput.value)">Upgrade to Super Admin</button>
-</div>
+    <div>
+      <h3>Upgrade User to Super Admin</h3>
+      <input type="text" placeholder="Enter username" #upgradeUserInput>
+      <button (click)="upgradeToSuperAdmin(upgradeUserInput.value)">Upgrade to Super Admin</button>
+    </div>
 
-</div>
-
-
+  </div>
 
 
 
 
 
-<!-- ---------------------------------------------------------------------------------- -->
 
-<!-- Only show the following options if the user is a Group Admin -->
-<div *ngIf="isGroupAdmin && !isSuperAdmin">
+
+  <!-- ---------------------------------------------------------------------------------- -->
+
+  <!-- Only show the following options if the user is a Group Admin -->
+  <div *ngIf="isGroupAdmin && !isSuperAdmin">
     <h2>Group Admin Actions</h2>
-<div>
-    <h3>Create a New Group</h3>
-     <input type="text" placeholder="Enter group name" #groupNameInput />
-  <button (click)="createGroup(groupNameInput.value)">Create Group</button>
-</div>
-</div>
+    <div>
+      <h3>Create a New Group</h3>
+      <input type="text" placeholder="Enter group name" #groupNameInput />
+      <button (click)="createGroup(groupNameInput.value)">Create Group</button>
+    </div>
+  </div>
 
-<h3>Remove a Group</h3>
-<ul>
+  <h3>Remove a Group</h3>
+  <ul>
     <li *ngFor="let group of userInfo.groups">
-        {{ group }} <button (click)="removeGroup(group)">Remove</button>
+      {{ group }} <button (click)="removeGroup(group)">Remove</button>
     </li>
-</ul>
+  </ul>
 
 
 
 
 
 
-<!-- ---------------------------------------------------------------------------------- -->
-<!-- Only show the following options if the user is a Chat User -->
-<div *ngIf="isChatUser && !isSuperAdmin && !isGroupAdmin">
+  <!-- ---------------------------------------------------------------------------------- -->
+  <!-- Only show the following options if the user is a Chat User -->
+  <div *ngIf="isChatUser && !isSuperAdmin && !isGroupAdmin">
     <h2>Chat User Actions</h2>
     <!-- Add Group Admin-specific actions here -->
     <p>Chat User features will be added</p>
+  </div>
+
+
+
+
+
 </div>

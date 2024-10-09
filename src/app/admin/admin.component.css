@@ -1,105 +1,72 @@
-/* General page styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* Container for the header and user info */
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.container {
+/* General wrapper for the admin page */
+.main-wrapper {
+    background-color: #228B22; /* Green background */
     padding: 20px;
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
-h2 {
-    color: #4CAF50;
+/* General heading styling */
+h2, h3, p {
+    color: white;
 }
 
-h3 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-/* Input styling */
+/* Input field styling */
 input[type="text"] {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
 }
 
 /* Button styling */
 button {
-    padding: 10px 15px;
-    margin-right: 5px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
+    border: none;
+    background-color: #8FBC8F; /* Lighter green for buttons */
+    color: white;
     cursor: pointer;
+    font-size: 16px;
+    width: 100%; /* Full width buttons */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #5a6268; /* Darker on hover */
+    color: white;
 }
 
-/* List styling */
+/* List item styling for user groups */
 ul {
     list-style-type: none;
     padding: 0;
 }
 
-ul li {
-    background-color: #f9f9f9;
-    margin: 5px 0;
+li {
+    background-color: #f0f0f0;
     padding: 10px;
+    margin: 5px 0;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    color: #228B22;
 }
 
-/* Group Admin section */
-.group-admin-actions {
-    background-color: #f1f1f1;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 10px;
-}
-
-/* Super Admin section */
-.super-admin-actions {
-    background-color: #e1f5fe;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 10px;
-}
-
-/* Chat User section */
-.chat-user-actions {
-    background-color: #ffecb3;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 10px;
-}
-
-/* Utility for form-group */
-.form-group {
+/* Header styling */
+app-header {
+    display: block;
     margin-bottom: 20px;
 }
 
+/* Add specific styling for forms */
+input[type="text"], select {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
