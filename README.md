@@ -1,6 +1,6 @@
 
 # 3813ICT Software Frameworks Assignment Phase 1 (Ryota Ando / s5298111)
-# Repository Url: https://github.com/Ryotankobu/Software-Frameworks-Assignment-Phase-1.git
+# Repository Url: https://github.com/Ryotankobu/Assignment2_Software_Frameworks.git
 
 
 
