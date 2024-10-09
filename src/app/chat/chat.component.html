@@ -1,48 +1,41 @@
-
 <app-header></app-header>
 
 <div class="container">
-    <h1>Hi, {{ user.username }}</h1>
-    <button (click)="backLogin()">Back to Login</button>
+  <h1>Hi, {{ user.username }}</h1>
+  <button (click)="backLogin()">Back to Login</button>
 
-    <form>
-        <div class="form-group" *ngIf="isinRoom">
-            <label for="messageContent">New Message</label>
-            <input type="text" [(ngModel)]="messageContent" name="messageContent" id="messageContent"
-                class="form-control" />
-        </div>
-        <div class="form-group">
-            <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary">Chat</button>&nbsp;
-            <button *ngIf="!isinRoom" (click)="joinroom()" class="btn btn-primary">Join</button>&nbsp;
-            <button *ngIf="isinRoom" (click)="leaveroom()" class="btn btn-primary">Leave</button>
-        </div>
-        <select [(ngModel)]="roomslist" name="roomslist">
-            <option [ngValue]="null">Select Room</option>
-            <option *ngFor="let room of rooms">{{ room }}</option>
-        </select><br /><br />
-     
-      
- 
+  <form>
+    <div class="form-group" *ngIf="isinRoom">
+      <label for="messageContent">New Message</label>
+      <input type="text" [(ngModel)]="messageContent" name="messageContent" id="messageContent"
+             class="form-control" />
+    </div>
+    <div class="form-group">
+      <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary">Chat</button>&nbsp;
+      <button *ngIf="!isinRoom" (click)="joinroom()" class="btn btn-primary">Join</button>&nbsp;
+      <button *ngIf="isinRoom" (click)="leaveroom()" class="btn btn-primary">Leave</button>
+    </div>
+    <select [(ngModel)]="roomslist" name="roomslist">
+      <option [ngValue]="null">Select Room</option>
+      <option *ngFor="let room of rooms">{{ room }}</option>
+    </select><br /><br />
+  </form>
 
-    </form>
-
-    <!-- Room List Section -->
-<div class="room-list">
+  <!-- Room List Section -->
+  <div class="room-list">
     <h3>Available Rooms</h3>
     <ul>
-        <!-- Display rooms and allow user to select a room -->
-        <li *ngFor="let room of rooms" (click)="selectRoom(room)" [class.selected]="roomslist === room">
-            {{ room }}
-        </li>
+      <!-- Display rooms and allow user to select a room -->
+      <li *ngFor="let room of rooms" (click)="selectRoom(room)" [class.selected]="roomslist === room">
+        {{ room }}
+      </li>
     </ul>
+  </div>
+
+<!--  <h3>Notices</h3>-->
+<!--  <button (click)="clearnotice()" class="btn btn-primary">Clear Notice</button><br />-->
+<!--  <h3>Chat Message for {{ currentroom }} - {{ numusers }} Active Users</h3>-->
+<!--  <ul>-->
+    <li *ngFor="let message of messages">{{ message }}</li>
+  </ul>
 </div>
-
-
-    <h3>Notices</h3>
-    <button (click)="clearnotice()" class="btn btn-primary">Clear Notice</button><br />
-    <h3>Chat Message for {{ currentroom }} - {{ numusers }} Active Users</h3>
-    <ul>
-        <li *ngFor="let message of messages">{{ message }}</li>
-    </ul>
-</div>
-
