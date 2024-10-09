@@ -1,9 +1,6 @@
-<app-header></app-header>
 
-
-
-<!-- Display logged-in user information -->
 <div *ngIf="userInfo">
+  <app-header></app-header>
     <p>Welcome, {{ userInfo.username }}! </p>
     <p>Role: {{ userInfo.role }}</p>
     <p>Groups:</p>
