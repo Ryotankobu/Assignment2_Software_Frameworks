@@ -5,20 +5,31 @@
 
 
 ## Table of Contents
-
-1. [Description of Data Structures Used in Client and Server](#description-of-data-structures-used-in-client-and-server)
-2. [Division of Responsibilities Between Client and Server](#division-of-responsibilities-between-client-and-server)
-3. [List of Routes, Parameters, Return Values, and Purpose](#list-of-routes-parameters-return-values-and-purpose)
-4. [Angular Architecture: Components, Services, Models, Routes](#angular-architecture-components-services-models-routes)
-5. [Interaction Between Client and Server](#interaction-between-client-and-server)
+1. [Description of Git Repository](#description-of-git-repository)
+2. [Description of Data Structures Used in Client and Server](#description-of-data-structures-used-in-client-and-server)
+3. [Division of Responsibilities Between Client and Server](#division-of-responsibilities-between-client-and-server)
+4. [List of Routes, Parameters, Return Values, and Purpose](#list-of-routes-parameters-return-values-and-purpose)
+5. [Angular Architecture: Components, Services, Models, Routes](#angular-architecture-components-services-models-routes)
+6. [Interaction Between Client and Server](#interaction-between-client-and-server)
 
 ---
+## 2. Description of Git Repository
+### Repository Structure:
+- **Remote Repository:**:
+- master branch: Used to maintain the latest version of the code.
+- ryota_edit: Created because I had the same name for a local branch, though I was unsure of the necessity of keeping it in the remote repository
+- **Local Repository:**:
+- master branch: Used to keep the latest version of the local code by pulling updates from the remote master branch and pushing the latest local version of the code to remote. It has also been utilized to identify any conflicts between local branches.
+- ryota_edit: Used for code editing, as well as for comparing the latest code with the edited code.
+- 
+### How I used it:
 
-## 1. Description of Data Structures Used in Client and Server
+## 2. Description of Data Structures Used in Client and Server
 
 In this project, data structures are essential for organizing the various entities like users, groups, and messages. Both the client and server need to manage these entities effectively to support real-time communication and role-based functionalities.
 
 ### Client-Side Data Structures:
+As a practice, I always pull the latest remote code into my local master branch for version control. Then, I switch to my local editing branch (ryota_edit) to make changes. After editing, I merge it into my local master branch to check for any conflicts, even though there were no conflicts since I was the only person working on this project. I followed this by pushing my local master branch to the remote master for version control.
 
 - **User**: The user structure on the client side contains fields such as `username`, `role`, and `groups`. It determines the current user's identity and their permissions, such as whether they are a Super Admin, Group Admin, or Chat User. The user data is stored in session storage and retrieved when needed to adjust the UI accordingly.
   
@@ -36,7 +47,7 @@ In this project, data structures are essential for organizing the various entiti
 
 ---
 
-## 2. Division of Responsibilities Between Client and Server
+## 3. Division of Responsibilities Between Client and Server
 
 A clear division of responsibilities between the client and server is key to maintaining a well-structured application. This chat app leverages the client for the user interface and real-time interaction, while the server manages data persistence, user authentication, and message broadcasting.
 
@@ -58,7 +69,7 @@ A clear division of responsibilities between the client and server is key to mai
 
 ---
 
-## 3. List of Routes, Parameters, Return Values, and Purpose
+## 4. List of Routes, Parameters, Return Values, and Purpose
 
 The backend defines several routes that the client can interact with. These routes handle both RESTful and real-time WebSocket interactions.
 
@@ -96,7 +107,7 @@ The backend defines several routes that the client can interact with. These rout
 
 ---
 
-## 4. Angular Architecture: Components, Services, Models, Routes
+## 5. Angular Architecture: Components, Services, Models, Routes
 
 The Angular frontend is structured with a clear separation of concerns, making use of components, services, models, and routing to maintain organization and scalability.
 
@@ -121,7 +132,7 @@ The Angular frontend is structured with a clear separation of concerns, making u
 
 ---
 
-## 5. Interaction Between Client and Server
+## 6. Interaction Between Client and Server
 
 The interaction between the client and server is crucial for maintaining a real-time chat environment. Here’s how the communication flow works:
 
