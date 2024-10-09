@@ -14,16 +14,20 @@
 
 ---
 ## 1. Description of Git Repository
+
 ### Repository Structure:
-- **Remote Repository:**:
-- master branch: Used to maintain the latest version of the code.
-- ryota_edit: Created because I had the same name for a local branch, though I was unsure of the necessity of keeping it in the remote repository
-- **Local Repository:**:
-- master branch: Used to keep the latest version of the local code by pulling updates from the remote master branch and pushing the latest local version of the code to remote. It has also been utilized to identify any conflicts between local branches.
-- ryota_edit: Used for code editing, as well as for comparing the latest code with the edited code.
-- 
-### How I used it:
-As a practice, I always pull the latest remote code into my local master branch for version control. Then, I switch to my local editing branch (ryota_edit) to make changes. After editing, I merge it into my local master branch to check for any conflicts, even though there were no conflicts since I was the only person working on this project. I followed this by pushing my local master branch to the remote master for version control.
+
+- **Remote Repository:**
+  - **Master branch:** This branch holds the latest stable version of the code. It serves as the primary branch for version control and is synchronized with the local master branch.
+  - **ryota_edit branch:** Originally created for editing purposes, this branch was used alongside the local `ryota_edit` branch. It may not have been necessary to keep it in the remote repository, but it provided an additional layer for comparing edits.
+
+- **Local Repository:**
+  - **Master branch:** The local master branch mirrors the remote master branch. It is used for pulling the latest updates from the remote repository and pushing the latest local changes after testing. It also helps in identifying potential conflicts.
+  - **ryota_edit branch:** This branch is primarily used for making and testing code changes. After verifying edits, it is merged into the local master branch before pushing the final code to the remote master branch.
+
+### How I Used It:
+
+As part of my development workflow, I routinely pull the latest code from the remote repository into my local `master` branch to ensure I have the most up-to-date version. From there, I switch to my `ryota_edit` branch to make changes. Once edits are completed and tested, I merge them into my local `master` branch to check for any conflicts (although there were no conflicts since I was the sole contributor). Finally, I push the updated `master` branch back to the remote repository to maintain version control and keep the codebase up-to-date.
 
 ## 2. Description of Data Structures Used in Client and Server
 
