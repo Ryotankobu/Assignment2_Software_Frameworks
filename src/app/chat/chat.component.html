@@ -1,6 +1,7 @@
-<app-header></app-header>
+
 
 <div class="container">
+  <app-header></app-header>
   <h1>Hi, {{ user.username }}</h1>
   <button (click)="backLogin()">Back to Login</button>
 
@@ -33,5 +34,4 @@
   </div>
 
     <li *ngFor="let message of messages">{{ message }}</li>
-  </ul>
 </div>
