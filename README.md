@@ -1,5 +1,8 @@
 
-# Chat Application Documentation
+# 3813ICT Software Frameworks Assignment Phase 1 (Ryota Ando / s5298111)
+# Repository Url: https://github.com/Ryotankobu/Software-Frameworks-Assignment-Phase-1.git
+
+
 
 ## Table of Contents
 
